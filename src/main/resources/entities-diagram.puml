@@ -1,0 +1,40 @@
+@startuml
+
+class User {
+    +UUID id
+    +String name
+    +String email
+    +String password
+    +UserRole role
+    +Instant createdAt
+}
+
+enum UserRole {
+    ADMIN
+    LIBRARIAN
+    MEMBER
+}
+
+class Book {
+    +UUID id
+    +String title
+    +String author
+    +String description
+    +String isbn
+    +LocalDate publishedAt
+}
+
+class BookClubRoom {
+    +UUID id
+    +Book book
+    +int currentChapter
+    +int nextPlannedChapter
+    +String discussionBoardUrl
+    +User host
+    +String meetingUrl
+}
+
+User "1" -- "many" BookClubRoom : attends
+Book "1" -- "many" BookClubRoom : discussed in
+
+@enduml
