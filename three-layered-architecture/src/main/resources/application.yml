@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: three-layered-architecture
+  datasource:
+    url: jdbc:h2:file:./data/book-club;AUTO_SERVER=TRUE;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+  h2:
+    console:
+      enabled: true
