@@ -1,11 +1,12 @@
 package org.codeus.three_layered_arch.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 public class Book {
   @Id
   private String isbn;
@@ -23,5 +25,5 @@ public class Book {
   private LocalDate publishedAt;
 
   @CreationTimestamp
-  private Instant addedAt;
+  private LocalDateTime addedAt;
 }

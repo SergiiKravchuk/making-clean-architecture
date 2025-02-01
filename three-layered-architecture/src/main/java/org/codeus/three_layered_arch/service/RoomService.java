@@ -1,16 +1,16 @@
 package org.codeus.three_layered_arch.service;
 
-import org.codeus.three_layered_arch.dto.RoomDto;
-import org.codeus.three_layered_arch.dto.RoomView;
+import org.codeus.three_layered_arch.dto.RoomBasicData;
+import org.codeus.three_layered_arch.model.Room;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface RoomService {
 
-  Long createRoom(RoomDto roomDto);
+  Long createRoom(RoomBasicData roomDto);
 
-  Optional<RoomView> getRoomById(Long id);
+  Optional<Room> getRoomById(Long id);
 
-  List<RoomView> getAllRooms();
+  List<Room> getAllRooms();
 }
