@@ -1,60 +1,44 @@
 package org.codeus.three_layered_arch.service.impl;
 
-import org.codeus.three_layered_arch.dto.RoomDto;
-import org.codeus.three_layered_arch.dto.RoomView;
+import lombok.RequiredArgsConstructor;
+import org.codeus.three_layered_arch.dto.RoomBasicData;
 import org.codeus.three_layered_arch.model.Room;
-import org.codeus.three_layered_arch.repository.BookRepository;
 import org.codeus.three_layered_arch.repository.ClubberRepository;
 import org.codeus.three_layered_arch.repository.RoomRepository;
+import org.codeus.three_layered_arch.service.BookService;
 import org.codeus.three_layered_arch.service.RoomService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class RoomServiceImpl implements RoomService {
+
   private final RoomRepository roomRepository;
   private final ClubberRepository clubberRepository;
-  private final BookRepository bookRepository;
+  private final BookService bookService;
 
-  public RoomServiceImpl(RoomRepository roomRepository, ClubberRepository clubberRepository, BookRepository bookRepository) {
-    this.roomRepository = roomRepository;
-    this.clubberRepository = clubberRepository;
-    this.bookRepository = bookRepository;
-  }
-
-  public Long createRoom(RoomDto roomDto) {
+  public Long createRoom(RoomBasicData roomBasicData) {
     Room room = Room.builder()
-      .name(roomDto.roomName())
-      .owner(clubberRepository.getReferenceById(roomDto.ownerId()))
-      .book(bookRepository.getReferenceById(roomDto.bookId()))
-      .meetingUrl(roomDto.discussionBoardUrl())
-      .discussionBoardUrl(roomDto.discussionBoardUrl())
+      .name(roomBasicData.roomName())
+      .owner(clubberRepository.getReferenceById(roomBasicData.ownerId()))
+      .book(bookService.getBook(roomBasicData.bookId()))
+      .meetingUrl(roomBasicData.meetingUrl())
+      .discussionBoardUrl(roomBasicData.discussionBoardUrl())
+      .clubbers(roomBasicData.clubberIds().stream().map(clubberRepository::getReferenceById).collect(Collectors.toSet()))
       .build();
 
     return roomRepository.save(room).getId();
   }
 
-  public Optional<RoomView> getRoomById(Long id) {
-    return roomRepository.findById(id).map(this::mapRoomView);
+  public Optional<Room> getRoomById(Long id) {
+    return roomRepository.findById(id);
   }
 
-  public List<RoomView> getAllRooms() {
-    return roomRepository.findAll().stream().map(this::mapRoomView).toList();
-  }
-
-  protected RoomView mapRoomView(Room room) {
-    return new RoomView(
-      room.getId(),
-      room.getName(),
-      room.getOwner(),
-      room.getBook(),
-      room.getCurrentChapter(),
-      room.getNextPlannedChapter(),
-      room.getMeetingUrl(),
-      room.getDiscussionBoardUrl(),
-      room.getClubbers()
-    );
+  public List<Room> getAllRooms() {
+    return roomRepository.findAll();
   }
 }
