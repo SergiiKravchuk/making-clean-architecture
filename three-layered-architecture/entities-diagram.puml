@@ -1,10 +1,8 @@
 @startuml
 
-class User {
-    +UUID id
+class Clubber {
+    +Long id
     +String name
-    +String email
-    +String password
     +UserRole role
     +Instant createdAt
 }
@@ -16,25 +14,74 @@ enum UserRole {
 }
 
 class Book {
-    +UUID id
+    +String isbn
     +String title
     +String author
     +String description
-    +String isbn
     +LocalDate publishedAt
+    +LocalDateTime added_at
 }
 
 class BookClubRoom {
-    +UUID id
+    +Long id
+    +String name
+    +Clubber owner
     +Book book
-    +int currentChapter
-    +int nextPlannedChapter
-    +String discussionBoardUrl
-    +User host
-    +String meetingUrl
 }
 
-User "1" -- "many" BookClubRoom : attends
-Book "1" -- "many" BookClubRoom : discussed in
+Clubber "one" -- "many" BookClubRoom : attends
+Book "one" -- "one" BookClubRoom : discussed in
+
+@enduml
+
+
+Here's a PlantUML flow diagram based on your class diagram, representing the general flow of interactions:
+
+A Clubber creates a BookClubRoom.
+The BookClubRoom is associated with a Book.
+Other Clubbers can attend the BookClubRoom discussion.
+puml
+Copy
+Edit
+@startuml
+
+start
+
+:Clubber registers;
+:Clubber creates BookClubRoom;
+:Selects a Book for discussion;
+
+if (Other clubbers join?) then (Yes)
+    :Multiple clubbers attend;
+else (No)
+    :Only owner in room;
+endif
+
+:Discussion happens;
+:End of book discussion;
+
+stop
+
+@enduml
+
+@startuml
+
+actor Clubber
+participant "BookClubRoom" as BCR
+participant "Book" as Book
+
+Clubber -> BCR : createBookClubRoom(name)
+BCR -> Clubber : setOwner(Clubber)
+Clubber -> Book : selectBook(isbn)
+BCR -> Book : associateBook(Book)
+
+Clubber -> BCR : attendRoom()
+BCR -> Clubber : confirmAttendance()
+
+Clubber -> BCR : startDiscussion()
+BCR -> Clubber : discussionInProgress()
+
+Clubber -> BCR : endDiscussion()
+BCR -> Clubber : discussionSummary()
 
 @enduml

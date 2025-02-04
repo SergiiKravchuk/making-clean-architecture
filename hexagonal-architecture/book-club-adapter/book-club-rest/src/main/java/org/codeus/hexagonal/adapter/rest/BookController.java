@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class BookController {
 
-    @GetMapping
-    public String hello() {
-        return "Hello Book Clubbers!";
-    }
+  @GetMapping
+  public String hello() {
+    return "Hello Book Clubbers!";
+  }
 }

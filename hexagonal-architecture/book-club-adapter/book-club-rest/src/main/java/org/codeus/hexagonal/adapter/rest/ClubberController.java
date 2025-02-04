@@ -2,7 +2,7 @@ package org.codeus.hexagonal.adapter.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.codeus.hexagonal.adapter.rest.dto.ClubberDto;
-import org.codeus.hexagonal.domain.usecase.GetClubberUseCase;
+import org.codeus.hexagonal.domain.usecase.GetClubberBatchUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClubberController {
 
-    private final GetClubberUseCase clubberUseCase;
+  private final GetClubberBatchUseCase clubberUseCase;
 
-    @GetMapping
-    public ResponseEntity<List<ClubberDto>> getAllClubbers() {
-        return ResponseEntity.ok(clubberUseCase.getAllClubbers()
-                .stream()
-                .map(ClubberDto::from)
-                .toList());
-    }
+  @GetMapping
+  public ResponseEntity<List<ClubberDto>> getAllClubbers() {
+    return ResponseEntity.ok(clubberUseCase.getAllClubbers()
+      .stream()
+      .map(ClubberDto::from)
+      .toList());
+  }
 }

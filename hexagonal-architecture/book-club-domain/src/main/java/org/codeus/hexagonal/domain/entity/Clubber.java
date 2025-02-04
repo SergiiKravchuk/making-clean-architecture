@@ -11,8 +11,6 @@ import java.time.Instant;
 @AllArgsConstructor
 public class Clubber {
     private Long id;
-
     private String name;
-
     private Role role;
 }

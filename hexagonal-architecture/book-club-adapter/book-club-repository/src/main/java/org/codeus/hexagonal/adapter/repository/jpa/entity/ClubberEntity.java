@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -33,5 +33,5 @@ public class ClubberEntity {
   private EntityRole role;
 
   @CreationTimestamp
-  private Instant createdAt;
+  private LocalDateTime createdAt;
 }

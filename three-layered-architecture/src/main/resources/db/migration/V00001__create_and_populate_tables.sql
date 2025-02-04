@@ -24,10 +24,6 @@ create table if not exists room
     name                 varchar(255),
     owner_id             bigint  not null,
     book_id              varchar(255) unique,
-    current_chapter      integer not null,
-    next_planned_chapter integer not null,
-    discussion_board_url varchar(255),
-    meeting_url          varchar(255),
     primary key (id),
     constraint fk_room_owner foreign key (owner_id) references clubber,
     constraint fk_room_book foreign key (book_id) references book
