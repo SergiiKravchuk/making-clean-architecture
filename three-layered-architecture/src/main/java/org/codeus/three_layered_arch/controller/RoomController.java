@@ -2,7 +2,6 @@ package org.codeus.three_layered_arch.controller;
 
 import org.codeus.three_layered_arch.controller.request.CreateRoomRequest;
 import org.codeus.three_layered_arch.controller.response.RoomResponse;
-import org.codeus.three_layered_arch.dto.RoomBasicData;
 import org.codeus.three_layered_arch.service.impl.RoomServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

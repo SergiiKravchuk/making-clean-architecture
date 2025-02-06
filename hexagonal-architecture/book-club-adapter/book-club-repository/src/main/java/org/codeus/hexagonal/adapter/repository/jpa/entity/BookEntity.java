@@ -2,6 +2,7 @@ package org.codeus.hexagonal.adapter.repository.jpa.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Builder
+@Table(name = "book")
 public class BookEntity {
   @Id
   private String isbn;

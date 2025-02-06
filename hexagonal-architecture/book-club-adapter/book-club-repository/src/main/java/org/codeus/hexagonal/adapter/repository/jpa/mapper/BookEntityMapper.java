@@ -8,10 +8,22 @@ import org.codeus.hexagonal.domain.repository.BookRepository;
 public class BookEntityMapper {
 
   public BookRepository.DbBook to(BookEntity entity) {
-    //TODO 1: finish mapper
+    return new BookRepository.DbBook(
+      entity.getIsbn(),
+      entity.getTitle(),
+      entity.getAuthor(),
+      entity.getDescription(),
+      entity.getPublishedAt()
+    );
   }
 
   public BookEntity from(BookRepository.DbBook dbBook) {
-    //TODO 1
+    return BookEntity.builder()
+      .isbn(dbBook.isbn())
+      .title(dbBook.title())
+      .author(dbBook.author())
+      .description(dbBook.description())
+      .publishedAt(dbBook.publishedAt())
+      .build();
   }
 }

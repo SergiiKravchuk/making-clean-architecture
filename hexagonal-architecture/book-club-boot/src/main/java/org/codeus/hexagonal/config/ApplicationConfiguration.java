@@ -5,6 +5,7 @@ import org.codeus.hexagonal.application.usecase.CreateRoomUseCaseImpl;
 import org.codeus.hexagonal.application.usecase.GetClubberBatchUseCaseImpl;
 import org.codeus.hexagonal.application.usecase.GetRoomBatchUseCaseImpl;
 import org.codeus.hexagonal.application.usecase.GetRoomUseCaseImpl;
+import org.codeus.hexagonal.domain.adapter.BookDataAdapter;
 import org.codeus.hexagonal.domain.repository.BookRepository;
 import org.codeus.hexagonal.domain.repository.ClubberRepository;
 import org.codeus.hexagonal.domain.repository.RoomRepository;

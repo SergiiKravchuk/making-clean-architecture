@@ -1,4 +1,4 @@
-package org.codeus.hexagonal.domain.usecase;
+package org.codeus.hexagonal.domain.adapter;
 
 import java.time.LocalDate;
 import java.util.Optional;

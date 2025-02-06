@@ -1,23 +1,35 @@
 package org.codeus.hexagonal.adapter.repository;
 
 import lombok.RequiredArgsConstructor;
+import org.codeus.hexagonal.adapter.repository.jpa.entity.RoomEntity;
 import org.codeus.hexagonal.adapter.repository.jpa.mapper.RoomEntityMapper;
+import org.codeus.hexagonal.adapter.repository.jpa.repository.BookEntityRepository;
+import org.codeus.hexagonal.adapter.repository.jpa.repository.ClubberEntityRepository;
 import org.codeus.hexagonal.adapter.repository.jpa.repository.RoomEntityRepository;
 import org.codeus.hexagonal.domain.repository.RoomRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
 public class RoomRepositoryImpl implements RoomRepository {
 
   private final RoomEntityRepository roomEntityRepository;
+  private final BookEntityRepository bookEntityRepository;
+  private final ClubberEntityRepository clubberEntityRepository;
 
   @Override
   public Long save(DbRoom room) {
-    return roomEntityRepository.save(RoomEntityMapper.from(room)).getId();
+    RoomEntity roomEntity = RoomEntityMapper.partialFrom(room)
+      .book(bookEntityRepository.getReferenceById(room.bookId()))
+      .owner(clubberEntityRepository.getReferenceById(room.ownerId()))
+      .clubbers(room.clubberIds().stream().map(clubberEntityRepository::getReferenceById).collect(Collectors.toSet()))
+      .build();
+
+    return roomEntityRepository.save(roomEntity).getId();
   }
 
   @Override

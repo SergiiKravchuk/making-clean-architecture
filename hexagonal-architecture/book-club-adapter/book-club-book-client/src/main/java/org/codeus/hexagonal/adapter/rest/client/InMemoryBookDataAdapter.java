@@ -1,6 +1,6 @@
 package org.codeus.hexagonal.adapter.rest.client;
 
-import org.codeus.hexagonal.domain.usecase.BookDataAdapter;
+import org.codeus.hexagonal.domain.adapter.BookDataAdapter;
 
 import java.time.LocalDate;
 import java.util.Map;

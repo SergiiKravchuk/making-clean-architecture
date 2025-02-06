@@ -2,8 +2,6 @@ package org.codeus.hexagonal.domain.entity;
 
 import lombok.*;
 
-import java.time.Instant;
-
 @Getter
 @Setter
 @Builder

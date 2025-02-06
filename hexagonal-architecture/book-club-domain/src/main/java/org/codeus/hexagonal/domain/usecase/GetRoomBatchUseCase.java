@@ -8,8 +8,11 @@ public interface GetRoomBatchUseCase {
   record Request() {
   }
 
-  record Response(Long roomId, String roomName, Long ownerId, Set<Long> clubberIds, String bookIsbn) {
+  record RoomView(Long roomId, String roomName, Long ownerId, Set<Long> clubberIds, String bookIsbn) {
   }
 
-  List<Response> getAllRooms(Request request);
+  record Response(List<RoomView> roomViews) {
+  }
+
+  Response getAllRooms(Request request);
 }

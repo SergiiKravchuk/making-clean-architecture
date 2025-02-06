@@ -1,7 +1,7 @@
 package org.codeus.hexagonal.application.usecase;
 
 import org.codeus.hexagonal.domain.repository.RoomRepository;
-import org.codeus.hexagonal.domain.usecase.BookDataAdapter;
+import org.codeus.hexagonal.domain.adapter.BookDataAdapter;
 import org.codeus.hexagonal.domain.repository.BookRepository;
 import org.codeus.hexagonal.domain.usecase.CreateRoomUseCase;
 

@@ -14,12 +14,12 @@ public class GetRoomBatchUseCaseImpl implements GetRoomBatchUseCase {
   }
 
   @Override
-  public List<Response> getAllRooms(Request request) {
-    return repository.getAllRooms().stream().map(this::mapResponse).toList();
+  public Response getAllRooms(Request request) {
+    return new Response(repository.getAllRooms().stream().map(this::mapRoomView).toList());
   }
 
-  protected Response mapResponse(RoomRepository.DbRoom room) {
-    return new Response(
+  protected RoomView mapRoomView(RoomRepository.DbRoom room) {
+    return new RoomView(
       room.id(),
       room.name(),
       room.ownerId(),
