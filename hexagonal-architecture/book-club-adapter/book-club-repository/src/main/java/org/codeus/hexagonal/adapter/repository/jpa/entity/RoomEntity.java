@@ -12,6 +12,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "room")
 public class RoomEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +26,6 @@ public class RoomEntity {
   @OneToOne
   @JoinColumn(name = "book_id")
   private BookEntity book;
-
-  private int currentChapter;
-  private int nextPlannedChapter;
-
-  private String meetingUrl;
-  private String discussionBoardUrl;
 
   @ManyToMany
   @JoinTable(

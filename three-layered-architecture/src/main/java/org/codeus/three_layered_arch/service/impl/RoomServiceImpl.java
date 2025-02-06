@@ -26,8 +26,6 @@ public class RoomServiceImpl implements RoomService {
       .name(roomBasicData.roomName())
       .owner(clubberRepository.getReferenceById(roomBasicData.ownerId()))
       .book(bookService.getBook(roomBasicData.bookId()))
-      .meetingUrl(roomBasicData.meetingUrl())
-      .discussionBoardUrl(roomBasicData.discussionBoardUrl())
       .clubbers(roomBasicData.clubberIds().stream().map(clubberRepository::getReferenceById).collect(Collectors.toSet()))
       .build();
 

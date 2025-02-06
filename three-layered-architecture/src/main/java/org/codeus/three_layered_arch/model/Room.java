@@ -25,12 +25,6 @@ public class Room {
   @JoinColumn(name = "book_id")
   private Book book;
 
-  private int currentChapter;
-  private int nextPlannedChapter;
-
-  private String meetingUrl;
-  private String discussionBoardUrl;
-
   @ManyToMany
   @JoinTable(
     name = "room_clubbers",

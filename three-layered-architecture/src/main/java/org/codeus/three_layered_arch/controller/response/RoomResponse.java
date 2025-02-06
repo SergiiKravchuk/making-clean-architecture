@@ -8,9 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public record RoomResponse(Long roomId, String roomName, ClubberView roomOwner,
-                           BookView book, int currentChapter, int nextPlannedChapter,
-                           String meetingUrl, String discussionBoardUrl,
-                           Set<ClubberView> clubbers) {
+                           BookView book, Set<ClubberView> clubbers) {
 
   public static RoomResponse from(Room room) {
     return new RoomResponse(
@@ -18,10 +16,6 @@ public record RoomResponse(Long roomId, String roomName, ClubberView roomOwner,
       room.getName(),
       ClubberView.from(room.getOwner()),
       BookView.from(room.getBook()),
-      room.getCurrentChapter(),
-      room.getNextPlannedChapter(),
-      room.getMeetingUrl(),
-      room.getDiscussionBoardUrl(),
       room.getClubbers().stream().map(ClubberView::from).collect(Collectors.toSet())
     );
   }

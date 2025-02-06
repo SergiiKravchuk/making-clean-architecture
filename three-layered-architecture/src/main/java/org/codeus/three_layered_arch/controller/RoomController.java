@@ -20,10 +20,7 @@ public class RoomController {
 
   @PostMapping
   public ResponseEntity<Long> createRoom(@RequestBody CreateRoomRequest request) {
-    RoomBasicData roomBasicData = new RoomBasicData(request.roomName(), request.ownerId(), request.clubberIds(), request.bookId(),
-      request.meetingUrl(), request.discussionBoardUrl());
-
-    return ResponseEntity.ok(roomService.createRoom(roomBasicData));
+    return ResponseEntity.ok(roomService.createRoom(CreateRoomRequest.toData(request)));
   }
 
   @GetMapping("/{id}")
